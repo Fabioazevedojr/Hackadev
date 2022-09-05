@@ -10,21 +10,32 @@ import {
     AiOutlineUser as UserIcon
 } from "react-icons/ai";
 
+import {
+    FiMenu as MenuIcon
+} from "react-icons/fi"
+
+
 import Cart from './Cart'
 import SearchItems from './SearchItems'
+import Menu from './Menu';
 import './navbar.css'
 
 import { CartContext } from '../../Context/cart';
 
 const Navbar = () => {
     const [backgroundDisplay, setBackgroundDisplay] = useState({opacity: 0, zIndex: -1});
+    const [menuDisplay, setMenuDisplay] = useState({height: 0, width: 0, opacity: 0, zIndex: -1});
     
     const {bagItemsCount, bagDisplay, setBagDisplay} = useContext(CartContext);
 
     const displayBag = () => {
         setBagDisplay(!bagDisplay)
     }
-    
+
+    const displayMenu = () => {
+        setMenuDisplay({opacity: 1, zIndex: 99})
+    }
+
     useEffect(() => {
         setBackgroundDisplay(!bagDisplay)
     }, [bagDisplay]);
@@ -52,16 +63,26 @@ const Navbar = () => {
                 <SearchItems />
 
                 <div className='navbar__menu'>
-                    <button className='navbar__menu__button menu__button__bag' onClick={displayBag}>
+                    <button className='navbar__menu__button menu__button__bag navbar__desktop' onClick={displayBag}>
                         <BagIcon className='navbar__button__icon'/>
-                        <span className='bag__items-count'>{bagItemsCount}</span>
+                        {bagItemsCount ? <span className='bag__items-count'>{bagItemsCount}</span> : null}
                     </button>
 
-                    <Link to="/account" style={{textDecoration: 'none'}}>
-                        <button className='navbar__menu__button menu__button__account'>
-                            <UserIcon className='navbar__button__icon'/>
-                        </button>
+                    <Link to="/account" style={{textDecoration: 'none'}} className='navbar__menu__button menu__button__account navbar__desktop'>
+                        <UserIcon className='navbar__button__icon'/>
                     </Link>
+
+                    <button className='navbar__menu__button menu__button__mobile' onClick={displayMenu}>
+                        <MenuIcon className='navbar__button__icon'/>
+                    </button>
+                </div>
+
+                <div className='navbar__pages navbar__desktop'>
+                    <NavLink to="/home" className="navbar__pages__link">INÍCIO</NavLink>
+                    <NavLink to="/home/Masculino" className="navbar__pages__link">MASCULINO</NavLink>
+                    <NavLink to="/home/Feminino" className="navbar__pages__link">FEMININO</NavLink>
+                    <NavLink to="/home/Moletom" className="navbar__pages__link">MOLETONS</NavLink>
+                    <NavLink to="/home/Promoção" className="navbar__pages__link">PROMOÇÕES</NavLink>
                 </div>
     
                 <section 
@@ -82,13 +103,10 @@ const Navbar = () => {
                     <Cart />  
                 </div>
 
-                <div className='navbar__pages'>
-                    <NavLink to="/home" className="navbar__pages__link">INÍCIO</NavLink>
-                    <NavLink to="/home/Masculino" className="navbar__pages__link">MASCULINO</NavLink>
-                    <NavLink to="/home/Feminino" className="navbar__pages__link">FEMININO</NavLink>
-                    <NavLink to="/home/Moletom" className="navbar__pages__link">MOLETONS</NavLink>
-                    <NavLink to="/home/Promoção" className="navbar__pages__link">PROMOÇÕES</NavLink>
+                <div className='menu__box' style={menuDisplay}>
+                   <Menu setMenuDisplay={setMenuDisplay} displayBag={displayBag} />
                 </div>
+
             </header>
         </>
     )

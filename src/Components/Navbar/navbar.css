@@ -1,7 +1,7 @@
 .navbar {
     width: 100%;
 
-    background-color: #fff;
+    background-color: transparent;
     color: var(--HeavyMetal);
 
     font-family: Kumbh Sans;
@@ -19,18 +19,17 @@
 /* LOGO */
 
 .navbar .navbar__logo {
-    height: 100%;
-
-    transition: 1s;
+    transition: .3s;
 }
 
 .navbar .navbar__logo:hover {
-    filter: drop-shadow(0px 0px 5px #0e0d0d9c);
+    filter: drop-shadow(-5px 0px 2px #0e0d0d9c);
+    transform: translateX(5px);
 }
 
 .navbar .navbar__logo img {
     height: 70px;
-    padding: 10px;
+    padding: 7px;
     box-sizing: border-box;
 }
 
@@ -45,12 +44,13 @@
 .navbar .navbar__menu {
     display: flex;
     align-self: stretch;
+    align-items: center;
 }
+
 .navbar .navbar__menu__button {
     background-color: transparent;
     color: var(--HeavyMetal);
-    height: 100%;
-    border: 3px solid transparent;
+    border: none;
     box-sizing: border-box;
     position: relative;
     
@@ -58,34 +58,43 @@
     transition: .8s;
 }
 
-.navbar .navbar__menu__button:hover{
-    border-bottom-color: var(--HeavyMetal);
-}
-
-/* Adiciona uma margem em todos os filhos após o primeiro */
-.navbar .navbar__menu *:nth-child(n+2) {
-    margin-left: 5px;
-}
-
 .navbar .navbar__button__icon {
-    font-size: 45px;
+    font-size: 35px;
     padding: 5px;
-    
-    filter: drop-shadow(0px 0px 5px #00000050);
+    transition: .1s;
+}
+
+.navbar .navbar__menu__button:hover {
+    filter: drop-shadow(5px 0px 1px #0e0d0d9c);
+    transform: translateX(-5px);
 }
 
 .navbar__menu__button .bag__items-count {
     position: absolute;
 
-    top: 30px;
-    left: 0;
-    width: 85%;
-
+    background-color: #0e0d0da8;
+    color: #f7f7f7;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
 
-    display: flex;
-    justify-content: center;
+    align-content: center;
+    align-self: center;
+    
+    /* Centralizar Contador na Mochila*/
+    width: 20px;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    transition: .7s;
+}
+
+.navbar__menu__button:hover .bag__items-count {
+    background-color: #e67a7ad5;
+}
+
+.navbar .menu__button__mobile {
+    display: none;
 }
 
 /* CART */
@@ -143,6 +152,7 @@
 }
     
 .close__icon:hover {
+    transition: .6s;
     color: var(--MetallicRed);
 }
 
@@ -172,6 +182,8 @@
 
     padding: 0 2vw;
     box-sizing: border-box;
+
+    transition: .6s;
 }
 
 .navbar .navbar__pages .navbar__pages__link:hover{
@@ -180,43 +192,55 @@
 
 /* RESPONSIVIDADE */
 
+.navbar .menu__box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 99;
+
+    transition: .5s;
+}
+
 @media all and (max-width: 500px){
     .navbar {
-        justify-content: space-between;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+    }
+    
+    .navbar .menu__button__mobile {
+        display: unset;
+    }
+
+    .navbar .navbar__desktop {
+        justify-content: space-around;
+        display: none;
+    }
+
+    .navbar .navbar__logo{
+        order: 2;
     }
 
     .navbar .navbar__logo img {
         height: 50px;
+        padding: 7px 0;
+    }
+
+    .navbar .navbar__logo:hover {
+        filter: drop-shadow(5px 0px 2px #0e0d0d9c);
+        transform: translateX(-5px);
     }
 
     .navbar .navbar_search {
-        order: 2;
-        flex-grow: 1;
-        width: 100%;
-        margin-bottom: 15px;
+        width: 60%;
         box-sizing: border-box;
-    }
-
-    .navbar .navbar__pages {
-        order: 3;
+        order: 1;
     }
 
     .navbar .navbar__button__icon {
-        font-size: 35px;
+        order: 0;
+        font-size: 25px;
     }
 
-    .navbar .navbar__menu__button:hover{
-        border-bottom-color: #fff;
-    }
-
-    .navbar__menu__button .bag__items-count {
-        top: 20px;
-    
-        width: 46px;
-        height: 100%;
-    
-        font-size: 14px;
-        font-weight: 600;
-    }
 }
