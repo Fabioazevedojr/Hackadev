@@ -79,8 +79,8 @@ const Navbar = () => {
 
                 <div className='navbar__pages navbar__desktop'>
                     <NavLink to="/home" className="navbar__pages__link">INÍCIO</NavLink>
-                    <NavLink to="/home/Masculino" className="navbar__pages__link">MASCULINO</NavLink>
                     <NavLink to="/home/Feminino" className="navbar__pages__link">FEMININO</NavLink>
+                    <NavLink to="/home/Masculino" className="navbar__pages__link">MASCULINO</NavLink>
                     <NavLink to="/home/Moletom" className="navbar__pages__link">MOLETONS</NavLink>
                     <NavLink to="/home/Promoção" className="navbar__pages__link">PROMOÇÕES</NavLink>
                 </div>
