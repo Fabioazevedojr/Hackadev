@@ -18,28 +18,63 @@
     flex-wrap: wrap;
 }
 
-.footer__arrow-up {
+.footer__stick__buttons {
     position: sticky;
     
+    height: 0;
     width: fit-content;
     bottom: 40px;
-    left: calc(100vw - 80px);
+    left: calc(100vw - 60px);
+
+    display: flex;
+    flex-direction: column;
+    
+    transform: translateY(-100px);
     z-index: 20;
 
-    font-size: 40px;
-    line-height: 0;
-    color: var(--HeavyMetal);
-    border-radius: 7px;
-    background-color: #ffff;
-    box-shadow: 2px 2px 6px #000;
-    
-    cursor: pointer;
-    transition: 1.2s;
-    transform: translateY(-20px);
+    transition: .3s;
 }
 
-.footer__arrow-up:hover {
-    transform: translateY(-40px);
+.footer__stick__button {
+    position: relative;
+    
+    background-color: transparent;
+    color: var(--HeavyMetal);
+    font-size: 40px;
+    line-height: 0;
+
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    padding: 0;
+    box-sizing: border-box;
+    
+    cursor: pointer;
+    transition: .8s;
+}
+
+.footer__bag__count {
+    position: absolute;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+
+    width: 25px;
+    height: 20px;
+    padding-top: 2px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.footer__stick__button:hover {
+    filter: drop-shadow(5px 0px 1px #0e0d0d9c);
+    transform: translateX(-5px);
 }
 
 .footer hr {
@@ -267,6 +302,48 @@
         padding: 1em;
     }
 }
+
+@media all and (max-width: 500px) {
+    .footer__stick__buttons {
+        position: sticky;
+        
+        background-image: linear-gradient(#181a17e6, #181a17);
+        backdrop-filter: blur(2px);
+        
+        height: auto;
+        width: 100%;
+        bottom: -5px;
+        left: 0;
+
+        flex-direction: row;
+        justify-content: space-evenly;
+        
+        transform: translateY(5px);
+        z-index: 20;
+
+        padding: 5px 0 10px 0;
+        box-sizing: border-box;
+    }
+
+    .footer__stick__button {
+        font-size: 36px;
+        color: #fefefe;
+        
+        background-color: transparent;
+        line-height: 0;
+
+        margin-top: 0;
+        border-radius: unset;
+    }
+
+    .footer__stick__button:hover {
+        filter: unset;
+        transform: unset;
+
+        color: var(--MetallicRed);
+    }
+}
+
 
 @media all and (max-width: 450px) {
     .footer .footer__title{

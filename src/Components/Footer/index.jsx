@@ -1,5 +1,5 @@
 import { useLocation  } from 'react-router-dom'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { 
     IoLogoInstagram as InstagramIcon, 
@@ -14,14 +14,20 @@ import {
 } from 'react-icons/bs'
 
 import {
-    CgArrowUpR as UpArrowIcon
-} from 'react-icons/cg'
+    TiArrowUp as UpArrowIcon
+} from 'react-icons/ti'
 
+import {
+    AiOutlineShopping as BagIcon
+} from "react-icons/ai";
 
 import './footer.css'
+import { CartContext } from '../../Context/cart';
 
 const Footer = () => {
     const [displayUpPage, setDisplayUpPage] = useState(false);
+
+    const {bagItemsCount, setBagDisplay, bagDisplay} = useContext(CartContext);
 
     /* Não apresentar o footer na tela de checkou e login */
     const { pathname } = useLocation();
@@ -38,8 +44,14 @@ const Footer = () => {
 
     return (
         <>
-            <div className='footer__arrow-up' >
-                {displayUpPage ? <UpArrowIcon onClick={upPage}/> : null}
+            <div className='footer__stick__buttons' style={displayUpPage ? {opacity: 1, zIndex: 1} : {opacity: 0, zIndex: -1}}>
+                <button className='footer__stick__button' onClick={() => {setBagDisplay(!bagDisplay)}}>
+                        <BagIcon />
+                        {bagItemsCount ? <span className='footer__bag__count'>{bagItemsCount}</span> : null}
+                </button>
+                <button className='footer__stick__button' >
+                    <UpArrowIcon onClick={upPage} />
+                </button>
             </div>
 
             <footer className='footer'>
